@@ -7,7 +7,7 @@ var Enemy = function(x,y) {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = x * 101;
-    this.y = y * 83;
+    this.y = y * 83 - 20;
 };
 
 // Update the enemy's position, required method for game
@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now write your own player class
@@ -29,7 +29,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function(x,y) {
    this.x = x * 101;
-   this.y = y * 83;
+   this.y = y * 83 - 20;
    this.character = 'images/char-boy.png';
 };
 
@@ -38,23 +38,23 @@ Player.prototype.update = function(dt) {
 };
 
 Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.character), this.x, this.y);
+   ctx.drawImage(Resources.get(this.character), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(keyCode) {
     switch(keyCode)
     {
         case "up":
-            this.y = (this.y - 101 === -101 ? 606 : this.y - 101);
+            this.y = (this.y === 63 ? 5 * 83 -20 : this.y - 83);
             break;
         case "down":
-            this.y = (this.y + 101)%606;
+            this.y = (this.y + 83)%606;
             break;
         case "right":
             this.x = (this.x + 101)%505;
             break;
         case "left":
-            this.x = (this.x - 101 === -101 ? 505 : this.x - 101);
+            this.x = (this.x - 101 === -101 ? 404 : this.x - 101);
             break;
         default:
         break;
@@ -64,9 +64,9 @@ Player.prototype.handleInput = function(keyCode) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var enemy1 = new Enemy(0,0);
-var enemy2 = new Enemy(1,0);
-var enemy3 = new Enemy(0,1);
+var enemy1 = new Enemy(2,4);
+var enemy2 = new Enemy(1,4);
+var enemy3 = new Enemy(3,1);
 var enemy4 = new Enemy(1,2);
 var enemy5 = new Enemy(2,3);
 var enemy6 = new Enemy(3,2);
@@ -74,7 +74,7 @@ var enemy7 = new Enemy(2,2);
 var enemy8 = new Enemy(3,4);
 
 var allEnemies =[enemy1,enemy2,enemy3,enemy4,enemy5,enemy6,enemy7,enemy8];
-var player = new Player(1,5);
+var player = new Player(0,5);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
