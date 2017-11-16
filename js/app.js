@@ -12,7 +12,7 @@ var generalheight = 83;
 var offsetY = 20;
 
 // enemies move rate
-var enemiesMoveRate = 20;
+var enemiesMoveRate = 30;
 
 /********** init end ****************/
 
@@ -84,7 +84,12 @@ Player.prototype.handleInput = function(keyCode) {
     {
         case "up":
             // Player won when the player arrive at river
-            this.y = (this.y === generalheight - offsetY ? tableRows * generalheight - offsetY : this.y - generalheight);
+            if (this.y === generalheight - offsetY) {
+                this.y = tableRows * generalheight - offsetY;
+                isWin();
+            }else {
+              this.y = this.y - generalheight;
+            }
             break;
         case "down":
             this.y = (this.y === tableRows * generalheight - offsetY ? tableRows * generalheight - offsetY : this.y + generalheight);
@@ -164,7 +169,7 @@ function CheckOverLap() {
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-
+    playButton.click();
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -175,7 +180,24 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+// isWin
+function isWin() {
+  var congratulationLayout = document.getElementById("congratulation");
+  congratulationLayout.className = "congratulation";
+}
+
+// click again
+let playButton = document.getElementById("play");
+playButton.addEventListener("click", function (){
+  let scoreDisplay = document.getElementById("congratulation");
+  // win layout hidden
+  scoreDisplay.className = "no_display";
+});
+
 /********** utils end ****************/
+
+
+
 
 
 
