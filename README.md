@@ -8,6 +8,10 @@ This is a classic arcade Game. All you need to do is control the player to move 
 
 ## How to play?
 
-control the player to move to the other side of the river
+First, you should open index.html with your browser.
+
+Second,you can control the player to move to the other side of the river without touch the enemy. And you win!
+
+
 
 
